@@ -11,18 +11,20 @@
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v1.9.3/dist/alpine.js" defer></script>
+
 </head>
 <body class="bg-gray-100 text-gray-800">
 <header class="border-t-4 border-blue-700 bg-white shadow-md">
     <nav class="container mx-auto px-4 flex items-center justify-between py-6">
         <ul class="flex">
-            <li><a class="hover:text-gray-500" href="#">Home</a></li>
-            <li class="ml-8"><a class="hover:text-gray-500" href="#">About</a></li>
-            <li class="ml-8"><a class="hover:text-gray-500" href="#">Contact</a></li>
-            <li class="ml-8"><a class="hover:text-gray-500" href="#">Blog</a></li>
+            <li><a class="hover:text-blue-500" href="#">Home</a></li>
+            <li class="ml-8"><a class="hover:text-blue-500" href="#">About</a></li>
+            <li class="ml-8"><a class="hover:text-blue-500" href="#">Contact</a></li>
+            <li class="ml-8"><a class="hover:text-blue-500" href="#">Blog</a></li>
         </ul>
-        <div class="relative">
-            <button class="flex items-center">
+        <div class="relative" x-data="{ isOpen: false }">
+            <button class="flex items-center" @click="isOpen = !isOpen" @keydown.escape="isOpen = false">
                 <img src="{{ asset('avatar.png') }}" alt="avatar" class="w-8 h-8 rounded-full">
                 <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                     <path d="M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z"
@@ -30,7 +32,15 @@
                 </svg>
             </button>
             <ul
-                class="absolute font-normal bg-white shadow overflow-hidden rounded w-48 border mt-2 py-1 right-0 z-20 transform origin-top-right"
+                class="absolute font-normal bg-white shadow overflow-hidden rounded w-48 border mt-2 py-1 right-0 z-20 transform origin-top-right transform"
+                x-show="isOpen"
+                @click.away="isOpen = false"
+                x-transition:enter="transition-all ease-out duration-100"
+                x-transition:enter-start="opacity-0 scale-75"
+                x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition-all ease-in duration-100"
+                x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-75"
             >
                 <li>
                     <a href="#" class="flex items-center px-3 py-3 hover:bg-gray-200">
@@ -73,8 +83,8 @@
 <div class="container mx-auto px-4 xl:px-64 mt-12">
     <h2 class="text-2xl font-bold">FAQs</h2>
     <div class="leading-loose text-lg mt-6">
-        <div>
-            <button class="w-full font-bold border-b border-gray-400 py-3 flex justify-between items-center">
+        <div x-data="{ isOpen: false }">
+            <button class="w-full font-bold border-b border-gray-400 py-3 flex justify-between items-center" @click="isOpen = !isOpen">
                 <div>Why do I need Alpine JS?</div>
                 <svg x-show="!isOpen" class="fill-current" viewBox="0 0 24 24" width="24" height="24">
                     <path class="heroicon-ui"
@@ -87,6 +97,7 @@
             </button>
             <div
                 class="text-gray-700 mt-2 transform origin-top"
+                x-show="isOpen"
             >
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores iure quas laudantium dicta impedit,
                 est id delectus molestiae deleniti enim nobis rem et nihil. Magni consequuntur, suscipit voluptates,
@@ -108,23 +119,26 @@
                 temporibus ratione saepe magnam neque tempora debitis nobis rem eaque. Vero, repudiandae.
             </div>
         </div>
-
     </div>
 </div>
 
-<div class="container mx-auto px-4 xl:px-64 mt-12 mb-12">
+<div class="container mx-auto px-4 xl:px-64 mt-12 mb-12" x-data="{ tab: 'tab1' }">
     <h2 class="text-2xl font-bold">Tabs</h2>
     <ul class="flex border-b mt-6">
         <li class="-mb-px mr-1">
             <a
                 class="inline-block rounded-t py-2 px-4 font-semibold hover:text-blue-800"
+                :class="{ 'bg-white text-blue-700 border-l border-t' : tab === 'tab1'  }"
                 href="#"
+                @click.prevent="tab = 'tab1'"
             >Tab 1</a>
         </li>
         <li class="-mb-px mr-1">
             <a
                 class="inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
+                :class="{ 'bg-white text-blue-700 border-l border-t' : tab === 'tab2'  }"
                 href="#"
+                @click.prevent="tab = 'tab2'"
             >
                 Tab 2
             </a>
@@ -132,12 +146,15 @@
         <li class="-mb-px mr-1">
             <a
                 class="inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
-                href="#">Tab 3</a
+                :class="{ 'bg-white text-blue-700 border-l border-t' : tab === 'tab3'  }"
+                href="#"
+                @click.prevent="tab = 'tab3'"
+            >Tab 3</a
             >
         </li>
     </ul>
     <div class="content bg-white px-4 py-4 border-l border-r border-b pt-4">
-        <div>
+        <div x-show="tab==='tab1'">
             Tab1 content. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt sunt, consectetur eos quod
             perferendis mollitia consequuntur natus, porro molestiae qui iusto deserunt rerum tempore voluptatum itaque.
             Ad, nisi esse cum quidem consequuntur ullam obcaecati id facere beatae accusamus. Exercitationem atque
@@ -147,7 +164,7 @@
             laudantium? Tempore, doloremque autem culpa ad earum veniam odio sed, cupiditate possimus quidem veritatis
             et ex nisi vitae!
         </div>
-        <div>
+        <div x-show="tab==='tab2'">
             Tab2 content. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt sunt, consectetur eos quod
             perferendis mollitia consequuntur natus, porro molestiae qui iusto deserunt rerum tempore voluptatum itaque.
             Ad, nisi esse cum quidem consequuntur ullam obcaecati id facere beatae accusamus. Exercitationem atque
@@ -157,7 +174,7 @@
             laudantium? Tempore, doloremque autem culpa ad earum veniam odio sed, cupiditate possimus quidem veritatis
             et ex nisi vitae!
         </div>
-        <div>
+        <div x-show="tab==='tab3'">
             Tab3 content. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt sunt, consectetur eos quod
             perferendis mollitia consequuntur natus, porro molestiae qui iusto deserunt rerum tempore voluptatum itaque.
             Ad, nisi esse cum quidem consequuntur ullam obcaecati id facere beatae accusamus. Exercitationem atque
