@@ -9,90 +9,163 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-    <!-- Styles -->
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            height: 100vh;
-            margin: 0;
-        }
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
-            text-align: center;
-        }
-
-        .title {
-            font-size: 84px;
-        }
-
-        .links > a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
-        }
-    </style>
 </head>
-<body>
-<div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                @endif
-            @endauth
+<body class="bg-gray-100 text-gray-800">
+<header class="border-t-4 border-blue-700 bg-white shadow-md">
+    <nav class="container mx-auto px-4 flex items-center justify-between py-6">
+        <ul class="flex">
+            <li><a class="hover:text-gray-500" href="#">Home</a></li>
+            <li class="ml-8"><a class="hover:text-gray-500" href="#">About</a></li>
+            <li class="ml-8"><a class="hover:text-gray-500" href="#">Contact</a></li>
+            <li class="ml-8"><a class="hover:text-gray-500" href="#">Blog</a></li>
+        </ul>
+        <div class="relative">
+            <button class="flex items-center">
+                <img src="{{ asset('avatar.png') }}" alt="avatar" class="w-8 h-8 rounded-full">
+                <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z"
+                          class="heroicon-ui"></path>
+                </svg>
+            </button>
+            <ul
+                class="absolute font-normal bg-white shadow overflow-hidden rounded w-48 border mt-2 py-1 right-0 z-20 transform origin-top-right"
+            >
+                <li>
+                    <a href="#" class="flex items-center px-3 py-3 hover:bg-gray-200">
+                        <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                             height="24" class="text-gray-600">
+                            <path
+                                d="M12 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm9 11a1 1 0 0 1-2 0v-2a3 3 0 0 0-3-3H8a3 3 0 0 0-3 3v2a1 1 0 0 1-2 0v-2a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v2z"
+                                class="heroicon-ui"></path>
+                        </svg>
+                        <span class="ml-2">Account</span>
+                    </a>
+                </li>
+                <li class="border-b border-gray-400">
+                    <a href="#" class="flex items-center px-3 py-3 hover:bg-gray-200">
+                        <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                             height="24" class="text-gray-600">
+                            <path
+                                d="M9 4.58V4c0-1.1.9-2 2-2h2a2 2 0 0 1 2 2v.58a8 8 0 0 1 1.92 1.11l.5-.29a2 2 0 0 1 2.74.73l1 1.74a2 2 0 0 1-.73 2.73l-.5.29a8.06 8.06 0 0 1 0 2.22l.5.3a2 2 0 0 1 .73 2.72l-1 1.74a2 2 0 0 1-2.73.73l-.5-.3A8 8 0 0 1 15 19.43V20a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-.58a8 8 0 0 1-1.92-1.11l-.5.29a2 2 0 0 1-2.74-.73l-1-1.74a2 2 0 0 1 .73-2.73l.5-.29a8.06 8.06 0 0 1 0-2.22l-.5-.3a2 2 0 0 1-.73-2.72l1-1.74a2 2 0 0 1 2.73-.73l.5.3A8 8 0 0 1 9 4.57zM7.88 7.64l-.54.51-1.77-1.02-1 1.74 1.76 1.01-.17.73a6.02 6.02 0 0 0 0 2.78l.17.73-1.76 1.01 1 1.74 1.77-1.02.54.51a6 6 0 0 0 2.4 1.4l.72.2V20h2v-2.04l.71-.2a6 6 0 0 0 2.41-1.4l.54-.51 1.77 1.02 1-1.74-1.76-1.01.17-.73a6.02 6.02 0 0 0 0-2.78l-.17-.73 1.76-1.01-1-1.74-1.77 1.02-.54-.51a6 6 0 0 0-2.4-1.4l-.72-.2V4h-2v2.04l-.71.2a6 6 0 0 0-2.41 1.4zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"
+                                class="heroicon-ui"></path>
+                        </svg>
+                        <span class="ml-2">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center px-3 py-3 hover:bg-gray-200">
+                        <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                             viewBox="0 0 24 24" class="text-gray-600">
+                            <path d="M0 0h24v24H0z" fill="none"></path>
+                            <path
+                                d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path>
+                        </svg>
+                        <span class="ml-2">Logout</span>
+                    </a>
+                </li>
+            </ul>
         </div>
-    @endif
+    </nav>
+</header>
 
-    <div class="content">
-        <div class="title m-b-md">
-            Laravel
+<div class="container mx-auto px-4 xl:px-64 mt-12">
+    <h2 class="text-2xl font-bold">FAQs</h2>
+    <div class="leading-loose text-lg mt-6">
+        <div>
+            <button class="w-full font-bold border-b border-gray-400 py-3 flex justify-between items-center">
+                <div>Why do I need Alpine JS?</div>
+                <svg x-show="!isOpen" class="fill-current" viewBox="0 0 24 24" width="24" height="24">
+                    <path class="heroicon-ui"
+                          d="M12 22a10 10 0 110-20 10 10 0 010 20zm0-2a8 8 0 100-16 8 8 0 000 16zm1-9h2a1 1 0 010 2h-2v2a1 1 0 01-2 0v-2H9a1 1 0 010-2h2V9a1 1 0 012 0v2z"/>
+                </svg>
+                <svg x-show="isOpen" class="fill-current" viewBox="0 0 24 24" width="24" height="24">
+                    <path class="heroicon-ui"
+                          d="M12 22a10 10 0 110-20 10 10 0 010 20zm0-2a8 8 0 100-16 8 8 0 000 16zm4-8a1 1 0 01-1 1H9a1 1 0 010-2h6a1 1 0 011 1z"/>
+                </svg>
+            </button>
+            <div
+                class="text-gray-700 mt-2 transform origin-top"
+            >
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores iure quas laudantium dicta impedit,
+                est id delectus molestiae deleniti enim nobis rem et nihil. Magni consequuntur, suscipit voluptates,
+                dolorem ut deserunt laboriosam repudiandae, alias vero minima delectus iure quasi id earum reiciendis
+                est culpa autem commodi sed nisi hic. Impedit?
+            </div>
+        </div>
+        <div>
+            <button class="w-full font-bold border-b border-gray-400 py-3 flex justify-between items-center mt-4">
+                <div>Why am I so awesome?</div>
+                <svg class="fill-current" viewBox="0 0 24 24" width="24" height="24">
+                    <path class="heroicon-ui"
+                          d="M12 22a10 10 0 110-20 10 10 0 010 20zm0-2a8 8 0 100-16 8 8 0 000 16zm1-9h2a1 1 0 010 2h-2v2a1 1 0 01-2 0v-2H9a1 1 0 010-2h2V9a1 1 0 012 0v2z"/>
+                </svg>
+            </button>
+            <div class="text-gray-700 mt-2">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure vitae dicta aliquid quam voluptas sit
+                atque nostrum modi qui eveniet cumque a, exercitationem, eum deserunt odio repudiandae repellat
+                temporibus ratione saepe magnam neque tempora debitis nobis rem eaque. Vero, repudiandae.
+            </div>
         </div>
 
-        <div class="links">
-            <a href="https://laravel.com/docs">Docs</a>
-            <a href="https://laracasts.com">Laracasts</a>
-            <a href="https://laravel-news.com">News</a>
-            <a href="https://blog.laravel.com">Blog</a>
-            <a href="https://nova.laravel.com">Nova</a>
-            <a href="https://forge.laravel.com">Forge</a>
-            <a href="https://vapor.laravel.com">Vapor</a>
-            <a href="https://github.com/laravel/laravel">GitHub</a>
+    </div>
+</div>
+
+<div class="container mx-auto px-4 xl:px-64 mt-12 mb-12">
+    <h2 class="text-2xl font-bold">Tabs</h2>
+    <ul class="flex border-b mt-6">
+        <li class="-mb-px mr-1">
+            <a
+                class="inline-block rounded-t py-2 px-4 font-semibold hover:text-blue-800"
+                href="#"
+            >Tab 1</a>
+        </li>
+        <li class="-mb-px mr-1">
+            <a
+                class="inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
+                href="#"
+            >
+                Tab 2
+            </a>
+        </li>
+        <li class="-mb-px mr-1">
+            <a
+                class="inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
+                href="#">Tab 3</a
+            >
+        </li>
+    </ul>
+    <div class="content bg-white px-4 py-4 border-l border-r border-b pt-4">
+        <div>
+            Tab1 content. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt sunt, consectetur eos quod
+            perferendis mollitia consequuntur natus, porro molestiae qui iusto deserunt rerum tempore voluptatum itaque.
+            Ad, nisi esse cum quidem consequuntur ullam obcaecati id facere beatae accusamus. Exercitationem atque
+            consequatur enim accusantium necessitatibus, iure optio omnis minima consequuntur earum ab nihil, ea, rerum
+            dolor maxime! Voluptatibus, dolore. Et tempore consectetur aut possimus beatae atque harum nemo sed nisi
+            suscipit quia esse, obcaecati? Expedita commodi laboriosam esse dolorem debitis fugiat aspernatur, quidem
+            laudantium? Tempore, doloremque autem culpa ad earum veniam odio sed, cupiditate possimus quidem veritatis
+            et ex nisi vitae!
+        </div>
+        <div>
+            Tab2 content. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt sunt, consectetur eos quod
+            perferendis mollitia consequuntur natus, porro molestiae qui iusto deserunt rerum tempore voluptatum itaque.
+            Ad, nisi esse cum quidem consequuntur ullam obcaecati id facere beatae accusamus. Exercitationem atque
+            consequatur enim accusantium necessitatibus, iure optio omnis minima consequuntur earum ab nihil, ea, rerum
+            dolor maxime! Voluptatibus, dolore. Et tempore consectetur aut possimus beatae atque harum nemo sed nisi
+            suscipit quia esse, obcaecati? Expedita commodi laboriosam esse dolorem debitis fugiat aspernatur, quidem
+            laudantium? Tempore, doloremque autem culpa ad earum veniam odio sed, cupiditate possimus quidem veritatis
+            et ex nisi vitae!
+        </div>
+        <div>
+            Tab3 content. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt sunt, consectetur eos quod
+            perferendis mollitia consequuntur natus, porro molestiae qui iusto deserunt rerum tempore voluptatum itaque.
+            Ad, nisi esse cum quidem consequuntur ullam obcaecati id facere beatae accusamus. Exercitationem atque
+            consequatur enim accusantium necessitatibus, iure optio omnis minima consequuntur earum ab nihil, ea, rerum
+            dolor maxime! Voluptatibus, dolore. Et tempore consectetur aut possimus beatae atque harum nemo sed nisi
+            suscipit quia esse, obcaecati? Expedita commodi laboriosam esse dolorem debitis fugiat aspernatur, quidem
+            laudantium? Tempore, doloremque autem culpa ad earum veniam odio sed, cupiditate possimus quidem veritatis
+            et ex nisi vitae!
         </div>
     </div>
 </div>
