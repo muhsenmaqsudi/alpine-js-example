@@ -1021,6 +1021,11 @@ alphanum-sort@^1.0.0:
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
 
+alpinejs@^1.9.4:
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/alpinejs/-/alpinejs-1.9.4.tgz#082ae97bf619f1fdafcc16181048fb2197383cc8"
+  integrity sha512-LIpx5SkYhf0/waIqQ2p6gr2vyTTMFDBn1xXCUpoEzRRFlYyk86Y7/Mjwt4J88uDR1Q80D50FBDHOG410KvwbkA==
+
 ansi-colors@^3.0.0:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-3.2.4.tgz#e3a3da4bfbae6c86a9c285625de124a234026fbf"
