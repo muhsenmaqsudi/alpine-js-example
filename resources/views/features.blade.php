@@ -42,24 +42,11 @@
             </div>
         </div>
         <div class="w-1/6 p-2 border-4 border-gray-200 overflow-scroll" x-data="{ tab: 'foo' }">
-            <div x-data="{ open: false, city: '', cities: [], faqs: [
-                        {
-                            question: 'Why do I need Alpine JS?',
-                            answer: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores iure quas laudantium dicta impedit, est id delectus molestiae deleniti enim nobis rem et nihil. Magni consequuntur, suscipit voluptates, dolorem ut deserunt laboriosam repudiandae, alias vero minima delectus iure quasi id earum reiciendis est culpa autem commodi sed nisi hic. Impedit?',
-                            isOpen: false,
-                        },
-                        {
-                            question: 'Why am I so awesome?',
-                            answer: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi cumque, nulla harum aspernatur veniam ullam provident neque temporibus autem itaque odit modi magnam fuga eius quidem vel dolor non, aperiam hic, porro possimus veritatis numquam et! Animi nihil dolorem in, quis harum possimus numquam incidunt reprehenderit repellendus, maxime ut, nulla.',
-                            isOpen: false,
-                        },
-                    ] }">
+            <div x-data='{ city: "", cities: []}'>
                 <select x-model="city"
-                        @change="fetch(`/cities/${city}`)
+                        @change="fetch(`cities/${city}`)
                             .then(response => response.text())
                             .then(response => cities = response)
-                            .then(cities => console.log(cities))
-{{--                            .then(html => { $refs.city.innerHTML = html })--}}
                         "
                 >
                     @foreach($cities as $city)
@@ -68,14 +55,66 @@
                         >{{ $city['name']  }}</option>
                     @endforeach
                 </select>
-
-                <template x-for="city in cities" :key="city">
-                    <p x-text="city.name"></p>
-                    <div x-text="cities"></div>
+                <div x-text="cities"></div>
+                <template x-if="cities">
+                    <select name="">
+                        <template x-for="item in cities" :key="item">
+                            <option value="" x-text="item.name"></option>
+                        </template>
+                    </select>
                 </template>
             </div>
+
+
+                <div x-data='{ cities: [
+                        {
+                            "id":5,
+                            "name":
+                            "Karaj",
+                            "parent_id":2,
+                            "created_at":"2020-01-22 11:29:10",
+                            "updated_at":"2020-01-22 11:29:17"
+                        },
+                        {
+                            "id":6,
+                            "name":"Mehrshahr",
+                            "parent_id":2,
+                            "created_at":"2020-01-22 11:29:10",
+                            "updated_at":"2020-01-22 11:29:17"
+                        }
+                    ]
+                }'>
+                    <select>
+                        <template x-for="item in cities" :key="item">
+                            <option value="" x-text="item.name"></option>
+                        </template>
+                    </select>
+                </div>
+            </div>
         </div>
+
     </div>
 
 
 @endsection
+
+<div x-data='{ provinceId: "", cityId: "" ,cities: []}'>
+    <select x-model="provinceId"
+            @change="fetch(`cities/${provinceId}`)
+                            .then(response => response.text())
+                            .then(response => cities = response)
+                        "
+    >
+        @foreach($cities as $city)
+            <option
+                value="{{ $city['id']  }}"
+            >{{ $city['name']  }}</option>
+        @endforeach
+    </select>
+    <div x-text="cities"></div>
+    <select x-model="cityId">
+        <template x-for="city in cities" :key="city">
+            <option value="" x-text="city.name"></option>
+        </template>
+    </select>
+</div>
